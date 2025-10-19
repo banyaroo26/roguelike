@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://dftrpkfy22rxb"]
+
+[ext_resource type="Script" uid="uid://c522v7i005ncd" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://dohgdh1pdujhm" path="res://scripts/finite_state_machine.gd" id="2_qhqgy"]
+[ext_resource type="Script" uid="uid://ckbeflyi2hhn2" path="res://scripts/run.gd" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://bq23wm6wx07r2" path="res://scripts/idle.gd" id="4_dqkch"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_g2els")
+
+[node name="FiniteStateMachine" type="Node" parent="."]
+script = ExtResource("2_qhqgy")
+
+[node name="Run" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("3_qhqgy")
+
+[node name="Idle" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("4_dqkch")
