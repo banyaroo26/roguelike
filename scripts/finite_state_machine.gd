@@ -8,14 +8,14 @@ func _ready():
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child
-			child.signal.connect(change_state)
+			child.transition.connect(change_state)
 	current_state = initial_state
 
 func change_state(old_state: State, new_state_name: String):
 	if current_state != old_state:
 		print("something wrong")
 		return 
-	var new_state = states[new_state_name]
+	var new_state = states[new_state_name.to_lower()]
 	if not new_state:
 		print("non-existant state")
 		return
