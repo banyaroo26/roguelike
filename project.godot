@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="roguelike"
-run/main_scene="uid://dftrpkfy22rxb"
+run/main_scene="uid://dery62qhofpkq"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 boot_splash/image="uid://ciue7q8q2wrs6"
 config/icon="res://icon.svg"

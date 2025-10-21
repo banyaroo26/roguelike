@@ -1,31 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://dftrpkfy22rxb"]
+[gd_scene load_steps=7 format=3 uid="uid://dftrpkfy22rxb"]
 
-[ext_resource type="Script" uid="uid://c522v7i005ncd" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="Script" uid="uid://dohgdh1pdujhm" path="res://scripts/finite_state_machine.gd" id="2_qhqgy"]
-[ext_resource type="Script" uid="uid://ckbeflyi2hhn2" path="res://scripts/player_run.gd" id="3_qhqgy"]
-[ext_resource type="Script" uid="uid://kkw66qerykm4" path="res://scenes/player_marker.gd" id="3_tuyoq"]
-[ext_resource type="Script" uid="uid://bq23wm6wx07r2" path="res://scripts/player_idle.gd" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://c522v7i005ncd" path="res://scripts/player/player.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://dohgdh1pdujhm" path="res://scripts/fsm/finite_state_machine.gd" id="2_qhqgy"]
+[ext_resource type="Script" uid="uid://ckbeflyi2hhn2" path="res://scripts/player/player_run.gd" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://bq23wm6wx07r2" path="res://scripts/player/player_idle.gd" id="4_dqkch"]
 [ext_resource type="Texture2D" uid="uid://1d7eexj3bkmg" path="res://icon.svg" id="5_qlg0r"]
-[ext_resource type="Script" uid="uid://bcj5sh11f24xe" path="res://scenes/player_attack.gd" id="7_fjrip"]
+[ext_resource type="Script" uid="uid://bcj5sh11f24xe" path="res://scripts/player/player_attack.gd" id="7_fjrip"]
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(114, 97)
 script = ExtResource("1_g2els")
-metadata/_edit_group_ = true
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("5_qlg0r")
 
 [node name="Marker" type="Marker2D" parent="."]
-position = Vector2(32, -1)
-script = ExtResource("3_tuyoq")
-
-[node name="Sprite" type="Sprite2D" parent="Marker"]
-texture_filter = 1
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("5_qlg0r")
 
 [node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_qhqgy")

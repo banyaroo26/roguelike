@@ -4,18 +4,18 @@ class_name PlayerIdle
 @export var player: CharacterBody2D 
 
 func Enter():
-	print("entered idle state")
+	pass
 	
 func Exit():
 	pass
 	
 func PhysicsProcess(_delta):
+	# If there is wasd input, go to run state
 	var input_direction = Input.get_vector("left", "right", "up", "down")
-	
-	# If there is movement input, go to run state
 	if input_direction:
 		transition.emit(self, "PlayerRun")
 		
+	# If LMB input, go to attack state
 	var attack_input = Input.is_action_just_pressed("lmb")
 	if attack_input:
 		transition.emit(self, "PlayerAttack")
