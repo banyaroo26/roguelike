@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ciue7q8q2wrs6"
-path="res://.godot/imported/reimagined-large-dark.png-deff0c0c54c6318b647d54093ad570dc.ctex"
+uid="uid://bdt58gk2gjo54"
+path="res://.godot/imported/Idle1.png-98ddac3d0ef95190011e5a2e43b714bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/reimagined-large-dark.png"
-dest_files=["res://.godot/imported/reimagined-large-dark.png-deff0c0c54c6318b647d54093ad570dc.ctex"]
+source_file="res://assets/player0/Idle1.png"
+dest_files=["res://.godot/imported/Idle1.png-98ddac3d0ef95190011e5a2e43b714bc.ctex"]
 
 [params]
 

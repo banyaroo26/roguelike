@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://67sfyf6wvi76"]
+
+[ext_resource type="Script" uid="uid://dnvfdkpiyatrs" path="res://scripts/gun/bullet0.gd" id="1_0mgpm"]
+[ext_resource type="Texture2D" uid="uid://dcocovtd23ygh" path="res://assets/gun0/bullet.png" id="2_iv6dg"]
+
+[node name="Bullet0" type="CharacterBody2D"]
+position = Vector2(86, 71)
+script = ExtResource("1_0mgpm")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_iv6dg")

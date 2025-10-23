@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c72ys34v6s0br"]
+
+[ext_resource type="Texture2D" uid="uid://l0qcu570ip3t" path="res://assets/gun0/gun.png" id="1_2srk4"]
+[ext_resource type="Script" uid="uid://bt3klesuesard" path="res://scripts/gun/gun0.gd" id="1_d6m4t"]
+
+[node name="Gun0" type="CharacterBody2D"]
+z_index = 2
+script = ExtResource("1_d6m4t")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_2srk4")
+
+[node name="Marker" type="Marker2D" parent="."]
+position = Vector2(15, -3)
+
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true

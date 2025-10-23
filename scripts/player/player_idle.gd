@@ -4,7 +4,7 @@ class_name PlayerIdle
 @export var player: CharacterBody2D 
 
 func Enter():
-	pass
+	print("PlayerIdle entered")
 	
 func Exit():
 	pass

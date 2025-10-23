@@ -4,7 +4,7 @@ class_name PlayerRun
 @export var player: CharacterBody2D
 
 func Enter():
-	pass
+	print("PlayerRun entered")
 	
 func Exit():
 	pass
