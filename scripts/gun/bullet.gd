@@ -1,16 +1,15 @@
-extends CharacterBody2D
+extends Area2D
 class_name Bullet
 
-var target_position
 var bullet_speed
+var bullet_damage
+# var target_position
 
 func _ready():
 	pass
 
 func _physics_process(delta):
-	# velocity = target_position * bullet_speed 
-	velocity += target_position * bullet_speed
-	move_and_slide()
+	position += transform.x * bullet_speed * delta
 
-func _process(delta):
+func _process(_delta):
 	pass

@@ -5,7 +5,6 @@ class_name PlayerAttack
 
 func Enter():
 	var weapon = player.get_node("Weapon")
-	var world = get_tree().current_scene
 	weapon.fire()
 	
 func PhysicsProcess(_delta):

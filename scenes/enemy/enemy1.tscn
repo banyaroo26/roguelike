@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://dy6y6461ehyxi"]
+
+[ext_resource type="Texture2D" uid="uid://b4p51hsg436my" path="res://assets/enemy/enemy_1/orc_enemy.png" id="1_cjwkq"]
+[ext_resource type="Script" uid="uid://ca1xmo7i253qr" path="res://scripts/enemy/enemy_1/enemy_1.gd" id="1_ocqv0"]
+[ext_resource type="Script" uid="uid://mddxqxn4qciq" path="res://scripts/enemy/enemy_fsm.gd" id="2_ajdoy"]
+[ext_resource type="Script" uid="uid://bbw471kyh2iyc" path="res://scripts/enemy/enemy_1/enemy_1_idle.gd" id="3_3ibyr"]
+[ext_resource type="Script" uid="uid://16wwdm03y3nl" path="res://scripts/enemy/enemy_1/enemy_1_hurt.gd" id="5_5thvk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ocqv0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5thvk"]
+
+[node name="Enemy1" type="CharacterBody2D"]
+script = ExtResource("1_ocqv0")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_cjwkq")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ocqv0")
+
+[node name="HitBoxArea" type="Area2D" parent="."]
+
+[node name="HitBoxShape" type="CollisionShape2D" parent="HitBoxArea"]
+shape = SubResource("CapsuleShape2D_5thvk")
+
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_ajdoy")
+initial_state = NodePath("Enemy1Idle")
+
+[node name="Enemy1Idle" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("body")]
+script = ExtResource("3_3ibyr")
+body = NodePath("../..")
+
+[node name="Enemy1Hurt" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("body")]
+script = ExtResource("5_5thvk")
+body = NodePath("../..")
+
+[connection signal="area_entered" from="HitBoxArea" to="FiniteStateMachine" method="_on_hit_box_area_area_entered"]

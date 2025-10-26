@@ -3,9 +3,10 @@ class_name Gun0
 
 @export var bullet0_scene: String = "res://scenes/gun/bullet0.tscn"
 @onready var cooldown_timer: Timer = $CooldownTimer
+@onready var audio_player: AudioStreamPlayer2D = $AudioPlayer
 
 var cooldown = 0.5
-var knockback_force = 1
+var knockback_force = 0.0
 var can_fire = true
 
 func _ready():
@@ -16,6 +17,8 @@ func _ready():
 func fire():
 	print(cooldown_timer.wait_time)
 	if can_fire:
+		# gunshot sound
+		audio_player.play(0.0)
 		# fire the gun
 		bullet_scene = bullet0_scene
 		super.fire()

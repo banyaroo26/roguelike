@@ -1,12 +1,17 @@
 extends CharacterBody2D
+class_name Enemy
 
-@export var SPEED = 100
+var enemy_hp
 
 func _ready():
 	pass
 	
 func _physics_process(_delta):
-	move_and_slide()
+	pass
 	
 func _process(_delta):
-	pass
+	die()
+
+func die():
+	if enemy_hp <= 0:
+		queue_free()
