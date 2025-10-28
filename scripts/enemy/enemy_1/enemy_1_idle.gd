@@ -1,15 +1,16 @@
 extends State
 
-@export var body: CharacterBody2D
+@export var body: Enemy
 
 func Enter():
-	print("Enemy1Idle Entered")
+	print("Idle Entered")
 	
 func PhysicsProcess(_delta):
 	body.velocity = Vector2.ZERO
 	
 func Process(_delta):
-	pass
+	if body.player_detected and body.speed > 0:
+		transition.emit(self, 'Rush')
 	
 func Exit():
 	pass

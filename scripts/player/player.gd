@@ -1,6 +1,6 @@
-extends CharacterBody2D
+extends Player
 
-@export var SPEED = 100
+@export var speed = 100
 
 func _ready():
 	pass

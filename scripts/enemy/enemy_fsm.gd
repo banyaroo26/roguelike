@@ -3,6 +3,7 @@ extends Node
 @onready var states: Dictionary = {}
 @onready var current_state: State
 @export var initial_state: State
+@export var body: CharacterBody2D
 
 func _ready():
 	for child in get_children():
@@ -10,12 +11,6 @@ func _ready():
 			states[child.name.to_lower()] = child
 			child.transition.connect(change_state)
 	current_state = initial_state
-
-func enter_the_state(state):
-	if current_state:
-		current_state.Exit()
-	state.Enter()
-	current_state = state
 
 func change_state(old_state: State, new_state_name: String):
 	if current_state != old_state:
@@ -27,19 +22,29 @@ func change_state(old_state: State, new_state_name: String):
 		return
 	enter_the_state(new_state)
 
+func enter_the_state(state):
+	if current_state:
+		current_state.Exit()
+	state.Enter()
+	current_state = state
+
 func _physics_process(delta):
 	if current_state:
 		current_state.PhysicsProcess(delta)
-	
+
 func _process(delta):
 	if current_state:
 		current_state.Process(delta)
+	if body.health_point <= 0:
+		change_state(current_state, 'Die')
 
 func _on_hit_box_area_area_entered(area):
-	var new_state = null
+	""" When damage taken. """
 	if area is Bullet:
-		new_state = states['Enemy1Hurt'.to_lower()]
-		new_state.hurt_value = area.bullet_damage
-		print(area.velocity)
-		enter_the_state(new_state)
+		var new_state = states['Hurt'.to_lower()]
+		new_state.damage_taken = area.bullet_damage
+		if current_state:
+			current_state.Exit()
+		new_state.Enter()
+		current_state = new_state
 		area.queue_free()

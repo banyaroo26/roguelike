@@ -1,40 +1,159 @@
-[gd_scene load_steps=8 format=3 uid="uid://dy6y6461ehyxi"]
+[gd_scene load_steps=17 format=3 uid="uid://dy6y6461ehyxi"]
 
-[ext_resource type="Texture2D" uid="uid://b4p51hsg436my" path="res://assets/enemy/enemy_1/orc_enemy.png" id="1_cjwkq"]
 [ext_resource type="Script" uid="uid://ca1xmo7i253qr" path="res://scripts/enemy/enemy_1/enemy_1.gd" id="1_ocqv0"]
+[ext_resource type="Texture2D" uid="uid://dxssbernvt3nm" path="res://assets/enemy/enemy_1/orc_1_death_draft-Sheet.png" id="2_8tfq7"]
 [ext_resource type="Script" uid="uid://mddxqxn4qciq" path="res://scripts/enemy/enemy_fsm.gd" id="2_ajdoy"]
 [ext_resource type="Script" uid="uid://bbw471kyh2iyc" path="res://scripts/enemy/enemy_1/enemy_1_idle.gd" id="3_3ibyr"]
+[ext_resource type="Texture2D" uid="uid://dlluwawbjj8pf" path="res://assets/enemy/enemy_1/orc_1_walking-Sheet.png" id="3_mjv5f"]
 [ext_resource type="Script" uid="uid://16wwdm03y3nl" path="res://scripts/enemy/enemy_1/enemy_1_hurt.gd" id="5_5thvk"]
+[ext_resource type="Script" uid="uid://cnf522ejpop3p" path="res://scripts/enemy/enemy_1/enemy_1_attack.gd" id="5_eswjj"]
+[ext_resource type="Script" uid="uid://bmcdcw1fjje5b" path="res://scripts/enemy/enemy_1/enemy_1_die.gd" id="7_mjv5f"]
+[ext_resource type="Script" uid="uid://db47c0nqdcbfr" path="res://scripts/enemy/enemy_1/enemy_1_rush.gd" id="8_ru7qh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ocqv0"]
+
+[sub_resource type="Animation" id="Animation_eswjj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WalkSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DieSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_viycq"]
+resource_name = "die"
+length = 0.65
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DieSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_mjv5f"]
+resource_name = "idle"
+length = 0.333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WalkSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ru7qh"]
+resource_name = "walk"
+length = 1.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WalkSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iy31i"]
+_data = {
+&"RESET": SubResource("Animation_eswjj"),
+&"die": SubResource("Animation_viycq"),
+&"idle": SubResource("Animation_mjv5f"),
+&"walk": SubResource("Animation_ru7qh")
+}
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5thvk"]
 
 [node name="Enemy1" type="CharacterBody2D"]
 script = ExtResource("1_ocqv0")
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
+[node name="DieSprite" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("1_cjwkq")
+texture = ExtResource("2_8tfq7")
+hframes = 5
+frame = 1
+
+[node name="WalkSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("3_mjv5f")
+hframes = 4
+frame = 1
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ocqv0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_iy31i")
+}
 
 [node name="HitBoxArea" type="Area2D" parent="."]
 
 [node name="HitBoxShape" type="CollisionShape2D" parent="HitBoxArea"]
 shape = SubResource("CapsuleShape2D_5thvk")
 
-[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "body")]
 script = ExtResource("2_ajdoy")
-initial_state = NodePath("Enemy1Idle")
+initial_state = NodePath("Idle")
+body = NodePath("..")
 
-[node name="Enemy1Idle" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("body")]
+[node name="Attack" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("body", "animation_player")]
+script = ExtResource("5_eswjj")
+body = NodePath("../..")
+animation_player = NodePath("../../AnimationPlayer")
+
+[node name="Idle" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("body")]
 script = ExtResource("3_3ibyr")
 body = NodePath("../..")
 
-[node name="Enemy1Hurt" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("body")]
+[node name="Hurt" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("body")]
 script = ExtResource("5_5thvk")
 body = NodePath("../..")
+
+[node name="Die" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("body", "animation_player")]
+script = ExtResource("7_mjv5f")
+body = NodePath("../..")
+animation_player = NodePath("../../AnimationPlayer")
+
+[node name="Rush" type="Node" parent="FiniteStateMachine" node_paths=PackedStringArray("body", "animation_player")]
+script = ExtResource("8_ru7qh")
+body = NodePath("../..")
+animation_player = NodePath("../../AnimationPlayer")
 
 [connection signal="area_entered" from="HitBoxArea" to="FiniteStateMachine" method="_on_hit_box_area_area_entered"]

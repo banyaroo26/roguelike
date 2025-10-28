@@ -1,14 +1,17 @@
 extends State
 
-@export var body: CharacterBody2D
-var hurt_value
+@export var body: Enemy
+var damage_taken
 
 func Enter():
-	print("Enemy1Hurt Entered")
-	body.enemy_hp -= hurt_value
+	print("Hurt Entered")
+	body.health_point -= damage_taken
 	
 func PhysicsProcess(_delta):
-	transition.emit(self, "Enemy1Idle")
+	if body.health_point <= 0:
+		transition.emit(self, "Die")
+	else:
+		transition.emit(self, "Idle")
 	
 func Process(_delta):
 	pass

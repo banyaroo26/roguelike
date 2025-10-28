@@ -16,7 +16,7 @@ func PhysicsProcess(_delta):
 	if not input_direction:
 		transition.emit(self, "PlayerIdle")
 	else:
-		player.velocity = input_direction * player.SPEED
+		player.velocity = input_direction * player.speed
 		
 	# If LMB input, go to attack state
 	var attack_input = Input.is_action_just_pressed("lmb")

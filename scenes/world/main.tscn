@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3w2ti64lx76v"]
+
+[ext_resource type="PackedScene" uid="uid://dery62qhofpkq" path="res://scenes/world/world.tscn" id="1_0wkb6"]
+
+[node name="Node" type="Node"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 4
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+size = Vector2i(320, 180)
+
+[node name="World" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_0wkb6")]

@@ -8,3 +8,9 @@
 [node name="Player" parent="." instance=ExtResource("1_nnsk1")]
 
 [node name="Enemy1" parent="." instance=ExtResource("3_1fp7r")]
+
+[node name="Enemy2" parent="." instance=ExtResource("3_1fp7r")]
+position = Vector2(290, 27)
+
+[node name="Enemy3" parent="." instance=ExtResource("3_1fp7r")]
+position = Vector2(58, 41)

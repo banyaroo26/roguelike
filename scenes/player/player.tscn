@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://dftrpkfy22rxb"]
 
 [ext_resource type="Script" uid="uid://c522v7i005ncd" path="res://scripts/player/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://bdt58gk2gjo54" path="res://assets/player/player_0/Idle1.png" id="2_fjrip"]
 [ext_resource type="Script" uid="uid://dohgdh1pdujhm" path="res://scripts/player/player_fsm.gd" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://lo7ij7dwnbdo" path="res://assets/player/kiriko.png" id="3_0owmy"]
 [ext_resource type="PackedScene" uid="uid://c72ys34v6s0br" path="res://scenes/gun/gun0.tscn" id="3_fjrip"]
 [ext_resource type="Script" uid="uid://ckbeflyi2hhn2" path="res://scripts/player/player_run.gd" id="3_qhqgy"]
 [ext_resource type="Script" uid="uid://bq23wm6wx07r2" path="res://scripts/player/player_idle.gd" id="4_dqkch"]
@@ -13,6 +13,7 @@ position = Vector2(114, 97)
 script = ExtResource("1_g2els")
 
 [node name="Weapon" parent="." instance=ExtResource("3_fjrip")]
+position = Vector2(5, 3)
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
@@ -20,8 +21,7 @@ zoom = Vector2(3, 3)
 [node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-1, -6)
-texture = ExtResource("2_fjrip")
-hframes = 7
+texture = ExtResource("3_0owmy")
 
 [node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_qhqgy")
